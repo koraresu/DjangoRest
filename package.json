@@ -1,0 +1,36 @@
+{
+  "name": "allianceit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@material-ui/core": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "weak-key": "^1.0.1",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0"
+  },
+  "scripts": {
+    "dev": "webpack --mode development ./frontend/src/index.js --output ./static/main.js",
+    "build": "webpack --mode production ./frontend/src/index.js --output ./static/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koraresu/DjangoRest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/koraresu/DjangoRest/issues"
+  },
+  "homepage": "https://github.com/koraresu/DjangoRest#readme"
+}

@@ -12,7 +12,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class LanguageSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = language
-		fields = ('url', 'name')
+		fields = ('id', 'name')
 class LanguageTipsSerializer(serializers.HyperlinkedModelSerializer):
 	language_id = LanguageSerializer(read_only=True)
 	class Meta:
@@ -22,7 +22,17 @@ class ProfesionalSerializer(serializers.HyperlinkedModelSerializer):
 	languages = LanguageSerializer(read_only=True,many=True)
 	class Meta:
 		model = profesional
-		fields = ('url', 'firstname','lastname','languages')
+		fields = ('id', 'firstname','lastname','languages')
+	@transaction.atomic
+	def create(self, validated_data):
+		languages = self.initial_data.get("languages")
+		instance = profesional.objects.create( **validated_data )
+		for lang in languages:
+			try:
+				instance.languages.add( language.objects.get(pk=lang) )
+			except:
+				pass
+		return instance
 	@transaction.atomic
 	def update(self, instance, validated_data):
 		profesional_id   = instance.__dict__.get("id")

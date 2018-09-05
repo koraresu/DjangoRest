@@ -14,17 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.urls import path
 from django.contrib import admin
 from rest_framework import routers, serializers, viewsets
 from rest_framework.authtoken import views as rest_framework_views
 from Profesionals.serializers import UserSerializer, ProfesionalSerializer
 from Profesionals.viewsets import UserViewSet, ProfesionalViewSet
 from Profesionals.router import router
-
+from Profesionals.views import ProfesionalIndexView
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 
 urlpatterns = [
+    path(r'', ProfesionalIndexView, name='index' ),
 	url(r'^api/', ( include(router.urls) ) ),
     url(r'^admin/', admin.site.urls),
     url(r'^get_auth_token/$', rest_framework_views.obtain_auth_token, name='get_auth_token'),
