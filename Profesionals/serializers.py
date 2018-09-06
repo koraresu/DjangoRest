@@ -20,9 +20,10 @@ class LanguageTipsSerializer(serializers.HyperlinkedModelSerializer):
 		fields = ('url','title','description','language_id')
 class ProfesionalSerializer(serializers.HyperlinkedModelSerializer):
 	languages = LanguageSerializer(read_only=True,many=True)
+	picture   = serializers.URLField(read_only=True, source='picture.url')
 	class Meta:
 		model = profesional
-		fields = ('id', 'firstname','lastname','languages')
+		fields = ('id', 'picture','firstname','lastname','languages')
 	@transaction.atomic
 	def create(self, validated_data):
 		languages = self.initial_data.get("languages")
